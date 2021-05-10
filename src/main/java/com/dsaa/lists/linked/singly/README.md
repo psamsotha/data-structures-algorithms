@@ -17,7 +17,7 @@ locate that node or others indirectly. The last node of the list is known as
 the _**tail**_. There is also a reference to the tail to avoid unnecessary
 traversal.
 
-Linked lists are traversed by taking a node and looking at it's its _"next"_
+Linked lists are traversed by taking a node and looking at its _"next"_
 node reference and continuing until reaching the node that does not have a
 _"next"_ reference, which is the tail.
 
@@ -36,23 +36,24 @@ class SinglyLinkedList<E> {
 }
 ```
 
-<a name="contract"></a>
 ## Contract
 
 * [`size()`](#size) - Returns the number of elements in the list
-* [`isEmpty()`](#is-empty) - Returns `true` if the list is empty, and `false` otherwise.
+* [`isEmpty()`](#isempty) - Returns `true` if the list is empty, and `false` otherwise.
 * [`first()`](#first) - Returns (does not remove) the first element in the list.
 * [`last()`](#last) - Returns (does not remove) the last element in the list.
-* [`addFirst(e)`](#add-first) - Adds a new element to the front of the list.
-* [`addLast(e)`](#add-last) - Adds a new element to the end of the list.
-* [`removeFirst()`](#remove-first) - Removes and returns the first element of the list.
+* [`addFirst(e)`](#addfirste) - Adds a new element to the front of the list.
+* [`addLast(e)`](#addlaste) - Adds a new element to the end of the list.
+* [`removeFirst()`](#removefirst) - Removes and returns the first element of the list.
 
 
-<a name="implementations"></a>
 ## Implementations
 
-<a name="size"></a>
 ### `size()`
+
+An internal count should be kept and updated as elements are added and
+removed from the list. This allows for easy discovery without having to
+traverse the list
 
 ```java
 public int size() {
@@ -60,12 +61,9 @@ public int size() {
 }
 ```
 
-An internal count should be kept and updated as elements are added and
-removed from the list. This allows for easy discovery without having to
-traverse the list
-
-<a name="is-empty"></a>
 ### `isEmpty()`
+
+This can easily be determined by checking the `size()` of the list.
 
 ```java
 public boolean isEmpty() {
@@ -73,9 +71,6 @@ public boolean isEmpty() {
 }
 ```
 
-This can easily be determined by checking the `size()` of the list.
-
-<a name="first"></a>
 ### `first()`
 
 There should be a reference to the first (`head`) node in the list. So getting
@@ -87,7 +82,6 @@ public E first() {
 }
 ```
 
-<a name="last"></a>
 ### `last()`
 
 There should be a reference to the last (`tail`) node in the list. So getting
@@ -99,13 +93,12 @@ public E last() {
 }
 ```
 
-<a name="add-first"></a>
 ### `addFirst(e)`
 
-Adding an element to the front of the list can be accomplished with four easy
-steps:
+Adding an element to the front of the list can be accomplished with the
+following steps:
 
-1. Create a new node with the head as its _"next"_ node
+1. Create a new node with the `head` as its _"next"_ node
 2. Assign the new node to `head`
 3. Check to see if the list is empty. If it is, also set the node as the `tail` also.
 4. Increment the list size.
@@ -122,13 +115,12 @@ steps:
 }
 ```
 
-<a name="add-last"></a>
-### `addLast(E e)`
+### `addLast(e)`
 
 Adding an element to the end can be accomplished with the following steps:
 
-1. Create a new node with its next node as null.
-2. Check if the list is empty. If it is, set the head as the new node. If its
+1. Create a new node with its next node as null. The `tail` always has a null _"next"_.
+2. Check if the list is empty. If it is, set the `head` as the new node. If it's
    not empty, take the current `tail` and make its "next" node point to the
    new node.
 3. Make the new node the current `tail` node.
@@ -149,14 +141,16 @@ Adding an element to the end can be accomplished with the following steps:
  }
 ```
 
-<a name="remove-first"></a>
 ### `removeFirst()`
 
-Removing the first element is simply a reverse of adding the first element.
+Removing the first element is simply a reverse of adding the first element:
+
 1. If the list is empty, return null
-2. Take the head and make its "next" node the current head
+2. Take the `head` and make its "next" node the current head. If this was the
+   only element in the list, this will automatically make the `head` null, as
+   the `head` is also the `tail` when there is only one element.
 3. Decrement the list size
-4. If the list is empty, make the tail null
+4. If the list is empty, make the `tail` null
 
 ![remove-first](images/remove-first.png)
 
