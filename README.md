@@ -6,3 +6,7 @@ explained in a README. In the same directory will be the complete source code.
 
 * **LinkedLists**
     * [SinglyLinkedList](src/main/java/com/dsaa/lists/linked/singly/)
+* **Maps**
+    * [Map/AbstractMap/UnsortedTableMap](src/main/java/com/dsaa/maps/map/)
+* **HashTable**
+    * [AbstractHashMap/ChainHashMap](src/main/java/com/dsaa/maps/hashtable/)

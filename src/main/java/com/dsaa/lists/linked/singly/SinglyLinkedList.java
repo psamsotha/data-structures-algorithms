@@ -1,5 +1,7 @@
 package com.dsaa.lists.linked.singly;
 
+import java.util.Objects;
+
 import com.dsaa.lists.linked.LinkedList;
 
 public class SinglyLinkedList<E> implements LinkedList<E> {
@@ -78,8 +80,26 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
             return next;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node<?> node = (Node<?>) o;
+            if (!element.equals(node.element)) return false;
+            return Objects.equals(next, node.next);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = element.hashCode();
+            result = 31 * result + (next != null ? next.hashCode() : 0);
+            return result;
+        }
+
         public void setNext(Node<E> next) {
             this.next = next;
         }
+
+
     }
 }
